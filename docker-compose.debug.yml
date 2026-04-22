@@ -1,0 +1,18 @@
+services:
+  transform-rpc:
+    build:
+      context: .
+      dockerfile: rpc/transform/Dockerfile
+      target: debug
+    ports:
+      - "8081:8081"
+      - "2346:2345"
+
+  shorturl-api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+      target: debug
+    ports:
+      - "8080:8080"
+      - "2345:2345"

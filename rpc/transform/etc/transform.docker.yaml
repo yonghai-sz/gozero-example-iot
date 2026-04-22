@@ -1,0 +1,14 @@
+Name: transform.rpc
+DevServer:
+  Enabled: true
+Log:
+  Mode: console
+ListenOn: 0.0.0.0:8081
+Etcd:
+  Hosts:
+  - etcd:2379
+  Key: transform.rpc
+DataSource: root:zzz888@tcp(mysql:3306)/myexampledb
+Table: shorturl
+Cache:
+  - Host: redis:6379

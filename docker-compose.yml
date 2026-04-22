@@ -1,0 +1,74 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: my-mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: zzz888
+      MYSQL_DATABASE: myexampledb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./deploy/mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-pzzz888"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  redis:
+    image: redis:7.0.11
+    container_name: my-redis-container
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  etcd:
+    image: quay.io/coreos/etcd:v3.6.10
+    container_name: my-etcd-container
+    environment:
+      ALLOW_NONE_AUTHENTICATION: "yes"
+      ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2379"
+      ETCD_ADVERTISE_CLIENT_URLS: "http://etcd:2379"
+    ports:
+      - "2379:2379"
+    healthcheck:
+      test: ["CMD", "etcdctl", "endpoint", "health", "--endpoints=http://127.0.0.1:2379"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  transform-rpc:
+    build:
+      context: .
+      dockerfile: rpc/transform/Dockerfile
+      target: runtime
+    container_name: shorturl-transform-rpc
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      etcd:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+
+  shorturl-api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+      target: runtime
+    container_name: shorturl-api
+    depends_on:
+      transform-rpc:
+        condition: service_started
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:
