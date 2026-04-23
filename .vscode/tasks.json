@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "docker: up (runtime)",
+      "type": "shell",
+      "command": "bash scripts/dev/docker-compose/up.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "docker: up (debug)",
+      "type": "shell",
+      "command": "bash scripts/dev/docker-compose/debug.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "docker: logs",
+      "type": "shell",
+      "command": "bash scripts/dev/docker-compose/logs.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "docker: down",
+      "type": "shell",
+      "command": "bash scripts/dev/docker-compose/down.sh",
+      "problemMatcher": []
+    }
+  ]
+}

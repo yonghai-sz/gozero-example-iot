@@ -1,0 +1,47 @@
+# Version control
+.git/
+.gitignore
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+/bin/
+/dist/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Go build cache
+vendor/
+
+# Test files
+*_test.go
+*.test
+coverage.out
+
+# Documentation
+*.md
+docs/
+
+# Development files
+docker-compose*.yml
+scripts/
+deploy/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp

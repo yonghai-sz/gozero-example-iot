@@ -2,8 +2,12 @@ services:
   transform-rpc:
     build:
       context: .
-      dockerfile: rpc/transform/Dockerfile
+      dockerfile: services/rpc/transform/Dockerfile
       target: debug
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
     ports:
       - "8081:8081"
       - "2346:2345"
@@ -11,8 +15,12 @@ services:
   shorturl-api:
     build:
       context: .
-      dockerfile: api/Dockerfile
+      dockerfile: services/api/Dockerfile
       target: debug
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
     ports:
       - "8080:8080"
       - "2345:2345"
