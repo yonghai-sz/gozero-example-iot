@@ -7,9 +7,9 @@ package server
 import (
 	"context"
 
-	"gozero-example-iot/services/rpc/transform/internal/logic"
-	"gozero-example-iot/services/rpc/transform/internal/svc"
-	"gozero-example-iot/services/rpc/transform/pb/transform"
+	"gozero-example-iot/services/rpc-transform/internal/logic"
+	"gozero-example-iot/services/rpc-transform/internal/svc"
+	"gozero-example-iot/services/rpc-transform/pb/transform"
 )
 
 type TransformerServer struct {

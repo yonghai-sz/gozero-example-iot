@@ -7,7 +7,7 @@ package transformer
 import (
 	"context"
 
-	"gozero-example-iot/services/rpc/transform/pb/transform"
+	"gozero-example-iot/services/rpc-transform/pb/transform"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

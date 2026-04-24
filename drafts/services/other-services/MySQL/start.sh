@@ -13,7 +13,7 @@ docker run \
   --name my-mysql-container \
   -p 3307:3306 \
   -e MYSQL_ROOT_PASSWORD=zzz888 \
-  -e MYSQL_DATABASE=gozero \
+  -e MYSQL_DATABASE=myexampledb \
   mysql:8.0
 
 

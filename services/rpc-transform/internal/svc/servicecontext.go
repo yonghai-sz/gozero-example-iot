@@ -2,7 +2,7 @@ package svc
 
 import (
 	"gozero-example-iot/services/model"
-	"gozero-example-iot/services/rpc/transform/internal/config"
+	"gozero-example-iot/services/rpc-transform/internal/config"
 
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )

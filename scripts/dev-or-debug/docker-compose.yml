@@ -44,8 +44,8 @@ services:
 
   transform-rpc:
     build:
-      context: .
-      dockerfile: services/rpc/transform/Dockerfile
+      context: ../../
+      dockerfile: services/rpc-transform/Dockerfile
       target: runtime
     container_name: shorturl-transform-rpc
     depends_on:
@@ -60,7 +60,7 @@ services:
 
   shorturl-api:
     build:
-      context: .
+      context: ../../
       dockerfile: services/api/Dockerfile
       target: runtime
     container_name: shorturl-api

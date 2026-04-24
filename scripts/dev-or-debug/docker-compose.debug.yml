@@ -1,8 +1,8 @@
 services:
   transform-rpc:
     build:
-      context: .
-      dockerfile: services/rpc/transform/Dockerfile
+      context: ../../
+      dockerfile: services/rpc-transform/Dockerfile
       target: debug
     cap_add:
       - SYS_PTRACE
@@ -14,7 +14,7 @@ services:
 
   shorturl-api:
     build:
-      context: .
+      context: ../../
       dockerfile: services/api/Dockerfile
       target: debug
     cap_add:

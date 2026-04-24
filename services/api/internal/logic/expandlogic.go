@@ -8,7 +8,7 @@ import (
 
 	"gozero-example-iot/services/api/internal/svc"
 	"gozero-example-iot/services/api/internal/types"
-	"gozero-example-iot/services/rpc/transform/transformer"
+	"gozero-example-iot/services/rpc-transform/transformer"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

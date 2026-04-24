@@ -5,7 +5,7 @@ package svc
 
 import (
 	"gozero-example-iot/services/api/internal/config"
-	"gozero-example-iot/services/rpc/transform/transformer"
+	"gozero-example-iot/services/rpc-transform/transformer"
 
 	"github.com/zeromicro/go-zero/zrpc"
 )

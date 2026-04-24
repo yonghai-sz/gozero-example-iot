@@ -4,25 +4,25 @@
     {
       "label": "docker: up (runtime)",
       "type": "shell",
-      "command": "bash scripts/dev/docker-compose/up.sh",
+      "command": "bash scripts/dev-or-debug/up.sh",
       "problemMatcher": []
     },
     {
       "label": "docker: up (debug)",
       "type": "shell",
-      "command": "bash scripts/dev/docker-compose/debug.sh",
+      "command": "bash scripts/dev-or-debug/debug.sh",
       "problemMatcher": []
-    },
+    },    
     {
       "label": "docker: logs",
       "type": "shell",
-      "command": "bash scripts/dev/docker-compose/logs.sh",
+      "command": "bash scripts/dev-or-debug/logs.sh",
       "problemMatcher": []
     },
     {
       "label": "docker: down",
       "type": "shell",
-      "command": "bash scripts/dev/docker-compose/down.sh",
+      "command": "bash scripts/dev-or-debug/down.sh",
       "problemMatcher": []
     }
   ]
