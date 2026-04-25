@@ -5,6 +5,11 @@
 
 
 
+`go install github.com/golang/mock/mockgen@v1.6.0`  
+`mockgen -source=transformer/transformer.go -destination=transformer/transformer_mock.go -package=transformer`
+
+
+
 要修改的地方：  
 * etc/example.yaml
 * internal/config/config.go

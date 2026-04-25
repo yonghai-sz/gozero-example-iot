@@ -61,33 +61,3 @@ For small projects, Option 1 (Docker Compose) is usually enough. But for large-s
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-### Endpoints
-- **Shorten**:
-  - `GET http://localhost:8080/shorten?url=https://example.com`
-- **Expand**:
-  - `GET http://localhost:8080/expand?shorten=<key>`
-
-
-test the API Gateway service
-`curl -i "http://localhost:8080/shorten?url=http://www.example.cn"`
-`curl -i "http://localhost:8080/expand?shorten=fb5cd9"`
-
-
-### Useful ports
-- **API**: `8080`
-- **RPC**: `8081`
-- **MySQL**: `3307` (root password: `zzz888`, database: `myexampledb`)
-- **Redis**: `6379`
-- **Etcd**: `2379`

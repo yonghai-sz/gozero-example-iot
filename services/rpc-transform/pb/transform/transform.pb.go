@@ -202,19 +202,19 @@ var File_transform_proto protoreflect.FileDescriptor
 const file_transform_proto_rawDesc = "" +
 	"\n" +
 	"\x0ftransform.proto\x12\ttransform\"%\n" +
-	"\texpandReq\x12\x18\n" +
+	"\tExpandReq\x12\x18\n" +
 	"\ashorten\x18\x01 \x01(\tR\ashorten\"\x1e\n" +
 	"\n" +
-	"expandResp\x12\x10\n" +
+	"ExpandResp\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\"\x1e\n" +
 	"\n" +
-	"shortenReq\x12\x10\n" +
+	"ShortenReq\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\"'\n" +
-	"\vshortenResp\x12\x18\n" +
+	"\vShortenResp\x12\x18\n" +
 	"\ashorten\x18\x01 \x01(\tR\ashorten2~\n" +
-	"\vtransformer\x125\n" +
-	"\x06expand\x12\x14.transform.expandReq\x1a\x15.transform.expandResp\x128\n" +
-	"\ashorten\x12\x15.transform.shortenReq\x1a\x16.transform.shortenRespB\rZ\v./transformb\x06proto3"
+	"\vTransformer\x125\n" +
+	"\x06Expand\x12\x14.transform.ExpandReq\x1a\x15.transform.ExpandResp\x128\n" +
+	"\aShorten\x12\x15.transform.ShortenReq\x1a\x16.transform.ShortenRespB\rZ\v./transformb\x06proto3"
 
 var (
 	file_transform_proto_rawDescOnce sync.Once
@@ -230,16 +230,16 @@ func file_transform_proto_rawDescGZIP() []byte {
 
 var file_transform_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_transform_proto_goTypes = []any{
-	(*ExpandReq)(nil),   // 0: transform.expandReq
-	(*ExpandResp)(nil),  // 1: transform.expandResp
-	(*ShortenReq)(nil),  // 2: transform.shortenReq
-	(*ShortenResp)(nil), // 3: transform.shortenResp
+	(*ExpandReq)(nil),   // 0: transform.ExpandReq
+	(*ExpandResp)(nil),  // 1: transform.ExpandResp
+	(*ShortenReq)(nil),  // 2: transform.ShortenReq
+	(*ShortenResp)(nil), // 3: transform.ShortenResp
 }
 var file_transform_proto_depIdxs = []int32{
-	0, // 0: transform.transformer.expand:input_type -> transform.expandReq
-	2, // 1: transform.transformer.shorten:input_type -> transform.shortenReq
-	1, // 2: transform.transformer.expand:output_type -> transform.expandResp
-	3, // 3: transform.transformer.shorten:output_type -> transform.shortenResp
+	0, // 0: transform.Transformer.Expand:input_type -> transform.ExpandReq
+	2, // 1: transform.Transformer.Shorten:input_type -> transform.ShortenReq
+	1, // 2: transform.Transformer.Expand:output_type -> transform.ExpandResp
+	3, // 3: transform.Transformer.Shorten:output_type -> transform.ShortenResp
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
