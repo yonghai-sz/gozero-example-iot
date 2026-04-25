@@ -59,21 +59,3 @@ bash scripts/dev-or-debug/debug.sh
 ### 选择二：K8s
 
 
-
-
-
-
-
-
-
-
-
-
-
-# 系统架构图或数据流图
-# Mermaid 图表
-# 接口类型
-* 无需校验
-* 登录
-* jwt 接口
-* jwt + RBAC 接口

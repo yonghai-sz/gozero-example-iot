@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Transformer_Expand_FullMethodName  = "/transform.transformer/expand"
-	Transformer_Shorten_FullMethodName = "/transform.transformer/shorten"
+	Transformer_Expand_FullMethodName  = "/transform.Transformer/Expand"
+	Transformer_Shorten_FullMethodName = "/transform.Transformer/Shorten"
 )
 
 // TransformerClient is the client API for Transformer service.
@@ -142,15 +142,15 @@ func _Transformer_Shorten_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Transformer_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "transform.transformer",
+	ServiceName: "transform.Transformer",
 	HandlerType: (*TransformerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "expand",
+			MethodName: "Expand",
 			Handler:    _Transformer_Expand_Handler,
 		},
 		{
-			MethodName: "shorten",
+			MethodName: "Shorten",
 			Handler:    _Transformer_Shorten_Handler,
 		},
 	},

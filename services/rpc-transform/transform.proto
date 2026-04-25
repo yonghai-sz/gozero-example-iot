@@ -4,23 +4,23 @@ package transform;
 
 option go_package = "./transform";
 
-message expandReq {
-    string shorten = 1;
+message ExpandReq {
+  string shorten = 1;
 }
 
-message expandResp {
-    string url = 1;
+message ExpandResp {
+  string url = 1;
 }
 
-message shortenReq {
-    string url = 1;
+message ShortenReq {
+  string url = 1;
 }
 
-message shortenResp {
-    string shorten = 1;
+message ShortenResp {
+  string shorten = 1;
 }
 
-service transformer {
-    rpc expand(expandReq) returns(expandResp);
-    rpc shorten(shortenReq) returns(shortenResp);
+service Transformer {
+  rpc Expand(ExpandReq) returns(ExpandResp);
+  rpc Shorten(ShortenReq) returns(ShortenResp);
 }
