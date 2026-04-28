@@ -1,0 +1,87 @@
+name: docker
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docker-${{ github.ref_name || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  IMAGE_REPO: ${{ github.event.repository.name }}
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Compute image tags
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          shorturl_sha="${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_REPO }}-shorturl-api:sha-${{ github.sha }}"
+          transform_sha="${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_REPO }}-transform-rpc:sha-${{ github.sha }}"
+
+          shorturl_tags="$shorturl_sha"
+          transform_tags="$transform_sha"
+
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+            shorturl_tags="${shorturl_tags}"$'\n'"${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_REPO }}-shorturl-api:latest"
+            transform_tags="${transform_tags}"$'\n'"${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_REPO }}-transform-rpc:latest"
+          fi
+
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            tag="${GITHUB_REF#refs/tags/}"
+            shorturl_tags="${shorturl_tags}"$'\n'"${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_REPO }}-shorturl-api:${tag}"
+            transform_tags="${transform_tags}"$'\n'"${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_REPO }}-transform-rpc:${tag}"
+          fi
+
+          {
+            echo "shorturl_tags<<EOF"
+            echo "${shorturl_tags}"
+            echo "EOF"
+            echo "transform_tags<<EOF"
+            echo "${transform_tags}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build & push shorturl-api (linux/amd64)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: services/api/Dockerfile
+          target: runtime
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.shorturl_tags }}
+
+      - name: Build & push transform-rpc (linux/amd64)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: services/rpc-transform/Dockerfile
+          target: runtime
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.transform_tags }}
+

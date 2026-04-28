@@ -51,7 +51,7 @@ bash scripts/dev-or-debug/debug.sh
 
 ## 部署
 
-对于小项目，选 Docker Compose 通常就够了；但要是大规模系统，Kubernetes 是标准的部署方案（高可用、弹性伸缩和强大的服务编排能力）。go-zero 框架本身对云原生有非常好的支持。
+对于中小型项目，选 Docker Compose 通常就够了；但要是大规模系统，Kubernetes 是标准的部署方案（高可用、弹性伸缩和强大的服务编排能力）。go-zero 框架本身对云原生有非常好的支持。
 
 
 ### 选择一：Docker Compose

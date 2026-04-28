@@ -5,6 +5,11 @@ When working on your **temporary** branch, you can:
 
 
 
+`ssh -i /Users/chenyonghai/Desktop/SingaporeTest.pem root@47.84.204.211`    
+`uname -m`    
+
+
+
 
 ### Endpoints
 - **Shorten**:
