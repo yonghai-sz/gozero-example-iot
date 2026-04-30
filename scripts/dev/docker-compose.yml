@@ -1,3 +1,6 @@
+
+name: my-local-example
+
 services:
   mysql:
     image: mysql:8.0
@@ -8,7 +11,7 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
       - ../deploy-with-docker-compose/needs-to-exist-on-the-server/mysql/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-pzzz888"]
@@ -47,7 +50,8 @@ services:
       context: ../../
       dockerfile: services/rpc-transform/Dockerfile
       target: runtime
-    container_name: shorturl-transform-rpc
+    image: my-dev-transform-rpc-image:latest
+    container_name: my-dev-transform-rpc-container
     depends_on:
       mysql:
         condition: service_healthy
@@ -63,7 +67,8 @@ services:
       context: ../../
       dockerfile: services/api/Dockerfile
       target: runtime
-    container_name: shorturl-api
+    image: my-dev-shorturl-api-image:latest
+    container_name: my-dev-shorturl-api-container
     depends_on:
       transform-rpc:
         condition: service_started
@@ -71,4 +76,12 @@ services:
       - "8080:8080"
 
 volumes:
-  mysql_data:
+  mysql-data:
+    name: "my-mysql-data-volume"
+
+
+# networks:
+#   service-network: 
+#     name: "my-service-network"
+
+

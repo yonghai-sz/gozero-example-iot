@@ -23,19 +23,19 @@ bash scripts/test/test.sh
 Bring everything up:
 
 ```bash
-bash scripts/dev-or-debug/up.sh
+bash scripts/dev/up.sh
 ```
 
 Viewing Logs:
 
 ```bash
-bash scripts/dev-or-debug/logs.sh
+bash scripts/dev/logs.sh
 ```
 
 Stop and remove volumes:
 
 ```bash
-bash scripts/dev-or-debug/down.sh
+bash scripts/dev/down.sh
 ```
 
 ### Remote debugging
@@ -43,7 +43,7 @@ bash scripts/dev-or-debug/down.sh
 Start the stack in debug mode (same app ports + extra Delve ports):
 
 ```bash
-bash scripts/dev-or-debug/debug.sh
+bash scripts/dev/debug.sh
 ```
 
 Then attach your Go debugger to:

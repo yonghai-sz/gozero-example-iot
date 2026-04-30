@@ -1,3 +1,6 @@
+
+name: my-deploy-example
+
 services:
   mysql:
     image: mysql:8.0
@@ -8,7 +11,7 @@ services:
     ports:
       - "${MYSQL_PORT:-3307}:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p${MYSQL_ROOT_PASSWORD:-zzz888}"]
@@ -44,7 +47,7 @@ services:
 
   transform-rpc:
     image: ${IMAGE_NAMESPACE:?set IMAGE_NAMESPACE}/${IMAGE_REPO:-gozero-example-iot}-transform-rpc:${TAG:-latest}
-    container_name: shorturl-transform-rpc
+    container_name: my-transform-rpc-container
     depends_on:
       mysql:
         condition: service_healthy
@@ -60,7 +63,7 @@ services:
 
   shorturl-api:
     image: ${IMAGE_NAMESPACE:?set IMAGE_NAMESPACE}/${IMAGE_REPO:-gozero-example-iot}-shorturl-api:${TAG:-latest}
-    container_name: shorturl-api
+    container_name: my-shorturl-api-container
     depends_on:
       transform-rpc:
         condition: service_started
@@ -71,5 +74,14 @@ services:
     entrypoint: ["./shorturl-api", "-f", "etc/shorturl-api.yaml"]
 
 volumes:
-  mysql_data:
+  mysql-data:
+    name: "my-mysql-data-volume"
+
+
+
+# networks:
+#   service-network: 
+#     name: "my-service-network"
+
+
 

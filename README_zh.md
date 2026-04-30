@@ -21,19 +21,19 @@ bash scripts/test/test.sh
 启动所有服务：
 
 ```bash
-bash scripts/dev-or-debug/up.sh
+bash scripts/dev/up.sh
 ```
 
 查看日志的方法：
 
 ```bash
-bash scripts/dev-or-debug/logs.sh
+bash scripts/dev/logs.sh
 ```
 
 停止并移除数据卷：
 
 ```bash
-bash scripts/dev-or-debug/down.sh
+bash scripts/dev/down.sh
 ```
 
 ### 远程调试
@@ -41,7 +41,7 @@ bash scripts/dev-or-debug/down.sh
 以调试模式启动服务栈（保留原有的应用端口 + 额外开放的 Delve 调试端口）：
 
 ```bash
-bash scripts/dev-or-debug/debug.sh
+bash scripts/dev/debug.sh
 ```
 
 接着，将你的 Go 调试器连接到以下地址：

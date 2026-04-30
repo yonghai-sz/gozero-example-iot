@@ -20,13 +20,20 @@ if [[ ! -f "$COMPOSE_FILE" ]]; then
   exit 1
 fi
 
+ENV_FILE="${ENV_FILE:-needs-to-exist-on-the-server/.env}"
+if [[ ! -f "$ENV_FILE" ]]; then
+  echo "env file not found: $DEPLOY_PATH/$ENV_FILE" >&2
+  exit 1
+fi
+
 TAG="${TAG:-latest}"
 
 echo "Deploy path: $DEPLOY_PATH"
 echo "Compose file: $COMPOSE_FILE"
+echo "Env file: $ENV_FILE"
 echo "Image tag: $TAG"
 
 export TAG
 
-docker compose -f "$COMPOSE_FILE" pull
-docker compose -f "$COMPOSE_FILE" up -d --remove-orphans
+docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" pull
+docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" up -d --remove-orphans

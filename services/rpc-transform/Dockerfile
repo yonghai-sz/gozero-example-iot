@@ -4,9 +4,7 @@ ENV GOPROXY=https://goproxy.cn,direct
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-# GOOS=linux GOARCH=amd64
-RUN CGO_ENABLED=0 \
-  go build -trimpath -ldflags="-s -w" -o /out/transform-rpc ./services/rpc-transform
+RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/transform-rpc ./services/rpc-transform
 
 
 
@@ -44,8 +42,7 @@ RUN go mod download
 RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
 FROM builder AS debug-builder
-RUN CGO_ENABLED=0 \
-  go build -gcflags="all=-N -l" -o /out/transform-rpc ./services/rpc-transform
+RUN CGO_ENABLED=0 go build -gcflags="all=-N -l" -o /out/transform-rpc ./services/rpc-transform
 
 FROM golang:1.24 AS debug
 WORKDIR /app
