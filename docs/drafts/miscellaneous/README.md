@@ -21,8 +21,6 @@ Copies the contents of the id_ed25519.pub file to your clipboard
 `git submodule update --remote .cursorrules`  
 `git submodule update --remote .github/ai-context`  
 
-Fresh clone: others should run:  
-`git submodule update --init --recursive`  
 
 Updates:  
 `git submodule update --remote --recursive`  
@@ -44,7 +42,6 @@ test the API Gateway service
 
 ### Useful ports
 - **API**: `8080`
-- **RPC**: `8081`
 - **MySQL**: `3307` (root password: `zzz888`, database: `myexampledb`)
 - **Redis**: `6379`
 - **Etcd**: `2379`

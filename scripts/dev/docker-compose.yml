@@ -12,18 +12,50 @@ services:
       - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ../deploy-with-docker-compose/needs-to-exist-on-the-server/mysql/init:/docker-entrypoint-initdb.d:ro
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-pzzz888"]
       interval: 5s
       timeout: 3s
       retries: 30
 
+  mongo:
+    image: mongo:7.0
+    container_name: my-mongo-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: zzz888
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mongosh",
+          "-u",
+          "root",
+          "-p",
+          "zzz888",
+          "--authenticationDatabase",
+          "admin",
+          "--quiet",
+          "--eval",
+          "db.adminCommand('ping')",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
   redis:
     image: redis:7.0.11
     container_name: my-redis-container
+    command: redis-server --loglevel warning
     ports:
       - "6379:6379"
+    volumes:
+      - redis-data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 3s
@@ -45,6 +77,21 @@ services:
       timeout: 5s
       retries: 30
 
+  emqx:
+    image: emqx/emqx:5.8.9
+    container_name: my-emqx-container
+    ports:
+      - "1883:1883"
+      - "8083:8083"
+      - "18083:18083"
+    volumes:
+      - emqx-data:/opt/emqx/data
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
   transform-rpc:
     build:
       context: ../../
@@ -57,10 +104,11 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      mongo:
+        condition: service_healthy        
       etcd:
         condition: service_healthy
-    ports:
-      - "8081:8081"
+    
 
   shorturl-api:
     build:
@@ -78,6 +126,12 @@ services:
 volumes:
   mysql-data:
     name: "my-mysql-data-volume"
+  redis-data:
+    name: "my-redis-data-volume"
+  mongo-data:
+    name: "my-mongo-data-volume"
+  emqx-data:
+    name: "my-emqx-data-volume"
 
 
 # networks:

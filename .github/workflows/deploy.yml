@@ -58,7 +58,7 @@ jobs:
 
           ssh -p "${port}" -o StrictHostKeyChecking=no "${DEPLOY_USER}@${DEPLOY_HOST}" \
             "export DEPLOY_PATH='${DEPLOY_PATH}'; export IMAGE_NAMESPACE='${IMAGE_NAMESPACE}'; export IMAGE_REPO='${IMAGE_REPO}'; export TAG='${TAG}'; bash -s" \
-            < scripts/deploy-with-docker-compose/remote-deploy.sh
+            < scripts/deploy/with-docker-compose/remote-deploy.sh
 
   deploy_production:
     if: >-
@@ -104,5 +104,5 @@ jobs:
 
           ssh -p "${port}" -o StrictHostKeyChecking=no "${DEPLOY_USER}@${DEPLOY_HOST}" \
             "export DEPLOY_PATH='${DEPLOY_PATH}'; export IMAGE_NAMESPACE='${IMAGE_NAMESPACE}'; export IMAGE_REPO='${IMAGE_REPO}'; export TAG='${TAG}'; bash -s" \
-            < scripts/deploy-with-docker-compose/remote-deploy.sh
+            < scripts/deploy/with-docker-compose/remote-deploy.sh
 

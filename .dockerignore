@@ -1,6 +1,11 @@
 # Version control
 .git/
 .gitignore
+.gitmodules
+
+# CI and local tooling (not needed inside the image build context)
+.github/
+.cursor/
 
 # IDE and editor files
 .idea/
@@ -8,6 +13,10 @@
 *.swp
 *.swo
 *~
+
+# OS junk
+.DS_Store
+Thumbs.db
 
 # Build artifacts
 /bin/
@@ -17,13 +26,20 @@
 *.so
 *.dylib
 
-# Go build cache
+# Go workspace (local multi-module layout; not used by these Dockerfiles)
+go.work
+go.work.sum
+
+# Vendored deps — image runs `go mod download` instead
 vendor/
 
 # Test files
 *_test.go
 *.test
 coverage.out
+coverage.*
+*.coverprofile
+profile.cov
 
 # Documentation
 *.md
@@ -32,7 +48,6 @@ docs/
 # Development files
 docker-compose*.yml
 scripts/
-deploy/
 
 # Logs
 *.log

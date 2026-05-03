@@ -5,11 +5,10 @@
 `docker container exec -it my-mongo-container mongosh admin`  在 admin 数据库下    
 
 
-`mongosh "mongodb://localhost:27017"`  
-`mongosh "mongodb://localhost:28015"`  
-`mongosh --port 28015`     
-`mongosh "mongodb://mongodb0.example.com:28015"`   
-`mongosh --host mongodb0.example.com --port 28015`   
+
+  
+`mongosh --host mongodb0.example.com --port 28015`  
+`mongosh "mongodb://mongodb0.example.com:28015"`  
 `mongosh "mongodb://mongodb0.example.com:28015" --username alice --authenticationDatabase admin`   
 
 to connect to a database called `qa` on localhost:  `mongosh "mongodb://localhost:27017/qa"`   

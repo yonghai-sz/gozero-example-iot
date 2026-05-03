@@ -19,11 +19,43 @@ services:
       timeout: 3s
       retries: 30
 
+  mongo:
+    image: mongo:7.0
+    container_name: my-mongo-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-change-me}
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mongosh",
+          "-u",
+          "${MONGO_INITDB_ROOT_USERNAME:-root}",
+          "-p",
+          "${MONGO_ROOT_PASSWORD:-change-me}",
+          "--authenticationDatabase",
+          "admin",
+          "--quiet",
+          "--eval",
+          "db.adminCommand('ping')",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
   redis:
     image: redis:7.0.11
     container_name: my-redis-container
+    command: redis-server --loglevel warning
     ports:
       - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 3s
@@ -45,6 +77,21 @@ services:
       timeout: 5s
       retries: 30
 
+  emqx:
+    image: emqx/emqx:5.8.9
+    container_name: my-emqx-container
+    ports:
+      - "${EMQX_MQTT_PORT:-1883}:1883"
+      - "${EMQX_WS_PORT:-8083}:8083"
+      - "${EMQX_DASHBOARD_PORT:-18083}:18083"
+    volumes:
+      - emqx-data:/opt/emqx/data
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
   transform-rpc:
     image: ${IMAGE_NAMESPACE:?set IMAGE_NAMESPACE}/${IMAGE_REPO:-gozero-example-iot}-transform-rpc:${TAG:-latest}
     container_name: my-transform-rpc-container
@@ -53,10 +100,10 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      mongo:
+        condition: service_healthy
       etcd:
         condition: service_healthy
-    ports:
-      - "${TRANSFORM_RPC_PORT:-8081}:8081"
     volumes:
       - ./config/transform.yaml:/app/etc/transform.yaml:ro
     entrypoint: ["./transform-rpc", "-f", "etc/transform.yaml"]
@@ -76,6 +123,12 @@ services:
 volumes:
   mysql-data:
     name: "my-mysql-data-volume"
+  redis-data:
+    name: "my-redis-data-volume"
+  mongo-data:
+    name: "my-mongo-data-volume"
+  emqx-data:
+    name: "my-emqx-data-volume"
 
 
 

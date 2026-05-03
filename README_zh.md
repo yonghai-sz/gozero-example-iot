@@ -2,11 +2,25 @@
 
 多租户平台（To B，面向企业）
 
+## Clone
+
+本仓库使用 [Git 子模块](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97) 管理共用的 Cursor 规则与 AI 上下文（`.cursorrules`、`.github/ai-context`、`.ai-context/zero-skills`）。
+
+```bash
+git clone --recurse-submodules <仓库地址>
+```
+
+若已克隆但未拉取子模块，在仓库根目录执行：
+
+```bash
+git submodule update --init --recursive
+```
+
 ## 开发
 
 ### IDE
 
-**Visual Studio Code** or **Cursor**
+**Cursor** or **Visual Studio Code**
 
 ### 单元测试
 
@@ -53,9 +67,8 @@ bash scripts/dev/debug.sh
 
 对于中小型项目，选 Docker Compose 通常就够了；但要是大规模系统，Kubernetes 是标准的部署方案（高可用、弹性伸缩和强大的服务编排能力）。go-zero 框架本身对云原生有非常好的支持。
 
-
 ### 选择一：Docker Compose
 
-### 选择二：K8s
+### 选择二：Kubernetes
 
 

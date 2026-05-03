@@ -19,7 +19,7 @@ docker run \
     -e "MINIO_ROOT_PASSWORD=zulekk11" \
     -e "MINIO_API_STALE_UPLOADS_EXPIRY=1h" \
     -e "MINIO_API_STALE_UPLOADS_CLEANUP_INTERVAL=1h" \
-    quay.io/minio/minio \
+    quay.io/minio/minio:RELEASE.2024-04-18T19-09-19Z \
     server /data \
       --console-address ":9001" \
       --ftp="address=:8021" \

@@ -22,7 +22,7 @@ Use a **server-side** `.env` file for **runtime/config variables** used by `dock
 - Location on server:
   - `$DEPLOY_PATH/needs-to-exist-on-the-server/.env`
 - Create it from the template:
-  - Copy `scripts/deploy-with-docker-compose/needs-to-exist-on-the-server/.env.example`
+  - Copy `scripts/deploy/with-docker-compose/needs-to-exist-on-the-server/.env.example`
   - Edit the values on the server (do not commit real secrets)
 
 

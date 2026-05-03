@@ -16,7 +16,7 @@ FROM alpine:latest AS runtime
 WORKDIR /app
 COPY --from=builder /out/transform-rpc ./transform-rpc
 COPY services/rpc-transform/etc ./etc
-EXPOSE 8081
+EXPOSE 9001
 ENTRYPOINT ["./transform-rpc", "-f", "etc/transform.docker.yaml"]
 
 
@@ -49,5 +49,5 @@ WORKDIR /app
 COPY --from=debug-builder /out/transform-rpc ./transform-rpc
 COPY --from=dlv /go/bin/dlv /usr/local/bin/dlv
 COPY services/rpc-transform/etc ./etc
-EXPOSE 8081 2345
+EXPOSE 9001 2345
 ENTRYPOINT ["dlv", "--listen=:2345", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "--continue", "/app/transform-rpc", "--", "-f", "/app/etc/transform.docker.yaml"]
