@@ -4,7 +4,7 @@
 
 docker run \
   -d \
-  --name my-redis-container \
+  --name my-single-redis-container \
   -p 6379:6379 \
   redis:7.0.11 \
   redis-server \

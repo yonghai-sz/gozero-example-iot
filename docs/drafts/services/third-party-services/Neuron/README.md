@@ -5,7 +5,7 @@
 ```sh
 docker run \
     -d \
-    --name neuron \
+    --name my-single-neuron-container \
     --log-opt max-size=100m \
     -p 7000:7000 \
     --privileged=true \

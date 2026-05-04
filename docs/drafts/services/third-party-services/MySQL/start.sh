@@ -10,7 +10,7 @@ set -euo pipefail
 
 docker run \
   -d \
-  --name my-mysql-container \
+  --name my-single-mysql-container \
   -p 3307:3306 \
   -e MYSQL_ROOT_PASSWORD=zzz888 \
   -e MYSQL_DATABASE=myexampledb \

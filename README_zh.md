@@ -30,7 +30,7 @@ git submodule update --init --recursive
 bash scripts/test/test.sh
 ```
 
-### 快速开始
+### 本地运行
 
 启动所有服务：
 
@@ -50,7 +50,7 @@ bash scripts/dev/logs.sh
 bash scripts/dev/down.sh
 ```
 
-### 远程调试
+### 调试
 
 以调试模式启动服务栈（保留原有的应用端口 + 额外开放的 Delve 调试端口）：
 

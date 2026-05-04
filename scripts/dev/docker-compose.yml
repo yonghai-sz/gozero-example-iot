@@ -99,6 +99,8 @@ services:
       target: runtime
     image: my-dev-transform-rpc-image:latest
     container_name: my-dev-transform-rpc-container
+    volumes:   
+      - backend-data:/app/backend-data 
     depends_on:
       mysql:
         condition: service_healthy
@@ -120,6 +122,8 @@ services:
     depends_on:
       transform-rpc:
         condition: service_started
+    volumes:
+      - backend-data:/app/backend-data 
     ports:
       - "8080:8080"
 
@@ -132,7 +136,8 @@ volumes:
     name: "my-mongo-data-volume"
   emqx-data:
     name: "my-emqx-data-volume"
-
+  backend-data:
+    name: "my-backend-data-volume"
 
 # networks:
 #   service-network: 

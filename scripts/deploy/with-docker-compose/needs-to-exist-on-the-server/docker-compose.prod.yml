@@ -106,6 +106,7 @@ services:
         condition: service_healthy
     volumes:
       - ./config/transform.yaml:/app/etc/transform.yaml:ro
+      - backend-data:/app/backend-data 
     entrypoint: ["./transform-rpc", "-f", "etc/transform.yaml"]
 
   shorturl-api:
@@ -118,6 +119,7 @@ services:
       - "${SHORTURL_API_PORT:-8080}:8080"
     volumes:
       - ./config/shorturl-api.yaml:/app/etc/shorturl-api.yaml:ro
+      - backend-data:/app/backend-data 
     entrypoint: ["./shorturl-api", "-f", "etc/shorturl-api.yaml"]
 
 volumes:
@@ -129,7 +131,8 @@ volumes:
     name: "my-mongo-data-volume"
   emqx-data:
     name: "my-emqx-data-volume"
-
+  backend-data:
+    name: "my-backend-data-volume"
 
 
 # networks:

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BASEDIR=`dirname "$0"`
-cd "$BASEDIR"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+cd "$DIR"
 
 
 
@@ -13,7 +14,7 @@ docker run \
     -p 9001:9001 \
     -p 8021:8021 \
     -p 21100-21200:21100-21200 \
-    --name my-minio-container \
+    --name my-single-minio-container \
     -v /var/minio/data:/data \
     -e "MINIO_ROOT_USER=rootuser" \
     -e "MINIO_ROOT_PASSWORD=zulekk11" \
@@ -37,5 +38,3 @@ docker run \
 
 
 docker container logs my-minio-container -f
-
-

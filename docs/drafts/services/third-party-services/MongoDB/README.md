@@ -26,7 +26,7 @@ To verify your current database connection, use the `db.getMongo()` method.
 `use database`   
 `show collections`   
 
-退出容器命令：         `exit`      
+退出容器命令： `exit`      
 
 
 
@@ -48,7 +48,7 @@ To verify your current database connection, use the `db.getMongo()` method.
 `db.locations.find({      latitude:"NaN"                       }).sort({ field: -1 }).limit(1)`
 
 
-`db.locations.countDocuments({   })`   
+
 `db.locations.countDocuments({       createTime: { $lt: 1725430920 },          level: { $exists: false }        })`
 `db.locations.countDocuments({       createTime: { $lt: 1725430920 },          level: 0                         })`  
 `db.locations.countDocuments({       createTime: { $gt: 1702656000 },          upTime: { $lt: 1672635109000 }   })` 

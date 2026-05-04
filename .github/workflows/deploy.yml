@@ -25,10 +25,10 @@ jobs:
     environment: staging
     steps:
       - name: Checkout (for deploy script)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Start ssh-agent
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
 
@@ -71,10 +71,10 @@ jobs:
     environment: production
     steps:
       - name: Checkout (for deploy script)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Start ssh-agent
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
 

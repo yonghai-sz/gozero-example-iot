@@ -6,6 +6,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 
 	"gozero-example-iot/services/api/internal/config"
 	"gozero-example-iot/services/api/internal/handler"
@@ -23,7 +24,11 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 
-	server := rest.MustNewServer(c.RestConf)
+	var opts []rest.RunOption
+	if c.PublicFiles != "" {
+		opts = append(opts, rest.WithFileServer("/files", http.Dir(c.PublicFiles)))
+	}
+	server := rest.MustNewServer(c.RestConf, opts...)
 	defer server.Stop()
 
 	ctx := svc.NewServiceContext(c)

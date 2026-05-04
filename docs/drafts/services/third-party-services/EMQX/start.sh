@@ -3,7 +3,7 @@ set -euo pipefail
 
 docker run \
   -d \
-  --name my-emqx-container \
+  --name my-single-emqx-container \
   -p 1883:1883 \
   -p 8083:8083 \
   -p 8084:8084 \

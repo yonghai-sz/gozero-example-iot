@@ -1,6 +1,7 @@
 Name: shorturl-api
 Host: 0.0.0.0
 Port: 8080
+PublicFiles: /app/backend-data/public
 Transform:
   # Target: direct:///localhost:9001
   Etcd:

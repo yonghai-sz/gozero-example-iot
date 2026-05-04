@@ -3,7 +3,7 @@
 # docker volume create --name mongodb-data-vol
 
 docker run -itd \
-  --name my-mongo-container \
+  --name my-single-mongo-container \
   --network dev-network \
   -e MONGO_INITDB_ROOT_USERNAME=root \
   -e MONGO_INITDB_ROOT_PASSWORD=zzm9ccbcdE \
